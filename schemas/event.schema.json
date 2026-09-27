@@ -1,0 +1,30 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "title":"AWRP v0.1 Event",
+  "type":"object",
+  "required":["protocol","event_id","seq","context_id","task_id","type","actor","created_at","task_projection","summary","artifacts","integrity"],
+  "properties":{
+    "protocol":{"const":"awrp/0.1"},
+    "event_id":{"type":"string","minLength":1},
+    "seq":{"type":"integer","minimum":1},
+    "context_id":{"type":"string","minLength":1},
+    "task_id":{"type":"string","minLength":1},
+    "run_id":{"type":["string","null"]},
+    "type":{"enum":["TASK_CREATED","DISPATCH","ACK","INPUT_REQUEST","INPUT_PROVIDED","HANDOFF","REVIEW","APPROVAL","CANCEL","ERROR","RECONCILE","NOTE"]},
+    "actor":{"type":"object","required":["role","id"]},
+    "recipient":{"type":["object","null"]},
+    "causation_id":{"type":["string","null"]},
+    "created_at":{"type":"string","minLength":1},
+    "task_projection":{"type":"object","required":["state","phase","waiting_on"]},
+    "run":{"type":["object","null"]},
+    "artifacts":{"type":"array"},
+    "summary":{"type":"string"},
+    "details":{"type":["string","null"]},
+    "approval":{"type":["object","null"]},
+    "idempotency_key":{"type":"string"},
+    "claimant":{"type":"string"},
+    "fencing":{"type":"object"},
+    "integrity":{"type":"object","required":["prev_event_id","prev_event_hash","event_hash"]}
+  },
+  "additionalProperties":false
+}

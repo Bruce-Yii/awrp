@@ -1,0 +1,19 @@
+# Local state and caches
+.demo/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Workspace-only project metadata (not part of the public snapshot)
+project.json
+executor_plan.md
+data/
+releases/
+scripts/
+temp/
+
+# Local outputs
+*.log
+*.tmp

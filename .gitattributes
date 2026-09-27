@@ -1,0 +1,14 @@
+*.py text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+
+# AWRP canonical artifacts must be byte-stable across platforms.
+# Recorded SHA-256 for patch/diff artifacts is computed over LF-canonical
+# bytes. These rules force LF in the worktree so naive verification agrees
+# everywhere; they do not rewrite history.
+tasks/**/events/*.json text eol=lf
+tasks/**/task.json text eol=lf
+tasks/**/artifacts/** text eol=lf
+contexts/*.json text eol=lf
+channels/**/*.json text eol=lf

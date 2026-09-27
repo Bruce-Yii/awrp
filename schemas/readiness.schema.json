@@ -1,0 +1,21 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "title":"AWRP Project-first execution-ready profile (report contract)",
+  "description":"Machine-readable shape of task_readiness() and of a Project-first ready manifest. Advisory: legacy manifests stay readable and validate; readiness gates creation (strict) and informs doctor. Never rewrites history.",
+  "type":"object",
+  "required":["ok","missing","transport"],
+  "properties":{
+    "ok":{"type":"boolean","description":"True only when every readiness item below holds."},
+    "missing":{"type":"array","items":{"type":"string"},"description":"Machine-readable missing/invalid item names; empty when ok."},
+    "transport":{"type":["string","null"],"description":"Relay identity when a root registry is available; reported, bound at publication."}
+  },
+  "additionalProperties":true,
+  "x-ready-manifest":{
+    "description":"A manifest is execution-ready when all hold; task_readiness() enforces exactly this.",
+    "required_manifest_fields":["project_id","routing.channel_id","routing.worker_endpoint","default_worker"],
+    "required_authority_identities":["authority.coordinator","authority.final_authority"],
+    "required_policy_keys":["local_read","local_write","local_commit","relay_write","push_user_fork","upstream_comment","upstream_pr_create","merge"],
+    "recognized_policy_values":["allow","dispatch_only","human_approval","deny"],
+    "ownership":"project owns routing.channel_id in the root registry when a root is available"
+  }
+}

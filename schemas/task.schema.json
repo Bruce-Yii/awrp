@@ -1,0 +1,23 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "title":"AWRP v0.1 Task Manifest",
+  "type":"object",
+  "required":["protocol","task_id","context_id","title","goal","created_at","created_by","default_worker","authority","side_effect_policy"],
+  "properties":{
+    "protocol":{"const":"awrp/0.1"},
+    "task_id":{"type":"string","minLength":1},
+    "context_id":{"type":"string","minLength":1},
+    "title":{"type":"string","minLength":1},
+    "goal":{"type":"string","minLength":1},
+    "created_at":{"type":"string","minLength":1},
+    "created_by":{"type":"string","minLength":1},
+    "default_worker":{"type":"string","minLength":1},
+    "source":{"type":["object","null"]},
+    "authority":{"type":"object"},
+    "side_effect_policy":{"type":"object"},
+    "transport":{"type":"object"},
+    "project_id":{"type":"string","pattern":"^[A-Za-z0-9][A-Za-z0-9_-]*$"},
+    "routing":{"type":"object"}
+  },
+  "additionalProperties":true
+}
