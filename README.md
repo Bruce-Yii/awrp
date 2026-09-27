@@ -141,6 +141,7 @@ The suite covers protocol/runtime invariants, transport restrictions, publicatio
 - `bridge/README.md` — transport request contract
 - `AWRP-BOOTSTRAP.md` and `docs/BOOTSTRAP.md` — fresh-session recovery flow
 - `docs/ARCHITECTURE.md` — identity, state, and recovery model
+- `docs/STATE-MACHINES.md` — Task, Run, claim, view, and CAS transitions
 - `docs/OPERATIONS.md` — coordinator and worker runbook
 - `docs/INTEGRATION.md` — Git, connector, bridge, and MCP transports
 - `docs/SECURITY.md` — protected properties and trust boundaries

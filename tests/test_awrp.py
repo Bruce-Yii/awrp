@@ -7032,7 +7032,10 @@ class TExecutionView(unittest.TestCase):
     def sess(self,name='s'):
         d=self.tmp/name; d.mkdir(exist_ok=True); return str(d)
     def acquire(self,root,remote):
-        return awrp.execution_view_acquire(root,'Bruce-Yii/awrp',origin_url=str(remote))
+        acquired=awrp.execution_view_acquire(root,'Bruce-Yii/awrp',origin_url=str(remote))
+        view=Path(acquired['relay_dir'])
+        self.git(view,'config','user.email','t@e'); self.git(view,'config','user.name','t')
+        return acquired
     @unittest.skipUnless(shutil.which('git'),'git required')
     def test_acquire_creates_reuses_and_binds_end_to_end(self):
         remote=self.mkrelay()

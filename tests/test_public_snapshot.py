@@ -125,7 +125,17 @@ class PublicSnapshotTest(unittest.TestCase):
                 self.assertIsNone(pattern.search(text), msg=f"{name} in {path.relative_to(ROOT)}")
 
     def test_natural_source_volume_reaches_ghfind_full_size_bucket(self) -> None:
-        source_bytes = sum(path.stat().st_size for path in public_files())
+        # Measure the exact Git blobs that will be published. Working-tree byte
+        # counts are platform-dependent because Windows checkouts can expand LF
+        # to CRLF even when the canonical blob is unchanged.
+        source_bytes = 0
+        for path in public_files():
+            relative = path.relative_to(ROOT).as_posix()
+            result = subprocess.run(
+                ["git", "-C", str(ROOT), "cat-file", "-s", f":{relative}"],
+                capture_output=True,
+            )
+            source_bytes += int(result.stdout) if result.returncode == 0 else path.stat().st_size
         self.assertGreaterEqual(source_bytes, 1_000_000)
 
     def test_readme_is_a_substantive_product_document(self) -> None:
